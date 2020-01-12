@@ -1,0 +1,40 @@
+﻿<div class="container">
+    <h1>Users</h1>
+    <div ng-controller="UsersController">
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Daily goal</th>
+                    <th>Is admin?</th>
+                    <th width="1em"><!-- edit button --></th>
+                    <th width="1em"><!-- remove button --></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="u in items()">
+                    <td>{{u.Id}}</td>
+                    <td>{{u.UserName}}</td>
+                    <td>{{u.DailyGoal}}</td>
+                    <td><i class="fa" ng-class="{'fa-check' : u.IsAdmin == true}"></i></td>
+                    <td width="1em">
+                        <button class="btn btn-xs btn-primary" ng-click="editRow(u)"><i class="fa fa-edit"></i></button>
+                    </td>
+                    <td width="1em">
+                        <button class="btn btn-xs btn-warning" ng-click="deleteRow(u.Id)"><i class="fa fa-remove"></i></button>
+                    </td>
+                </tr>
+                <tr ng-mouseenter="addVisible=true" ng-mouseleave="addVisible=false">
+                    <td align="right" colspan="4"><span ng-show="addVisible" ng-click="editRow({Id: 0, Date: today})" style="text-align: right; cursor: pointer">add another entry</span></td>
+                    <td>
+                        <button class="btn-success btn btn-xs pull-right" ng-click="editRow({Id: 0})">
+                            <i class="fa fa-plus"></i>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+    </div>
+</div>

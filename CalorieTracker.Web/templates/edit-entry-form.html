@@ -1,0 +1,53 @@
+﻿<div>
+    <div class="modal-header">
+        <h3 class="modal-title">{{action}}</h3>
+    </div>
+    <form novalidate name="entryForm" class="css-form" ng-submit="ok()">
+        <div class="modal-body">
+            <div class="form-group" ng-class="{ 'has-error': entryForm.date.$touched && entryForm.date.$invalid }">
+                <label>Date</label>
+                <p class="input-group">
+                    <input type="text" name="date" ng-disabled="saving" class="form-control" is-open="popup.opened"
+                           uib-datepicker-popup="yyyy-MM-dd" ng-model="entry.datePart" required />
+                    <span class="input-group-btn">
+                        <button type="button" ng-disabled="saving" class="btn btn-default" ng-click="openDatePicker()"><i class="glyphicon glyphicon-calendar"></i></button>
+                    </span>
+                </p>
+                <div class="help-block" ng-messages="entryForm.date.$error" ng-if="entryForm.date.$touched">
+                    <p ng-message="required">Date is required</p>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error': entryForm.time.$touched && entryForm.time.$invalid }">
+                <label>Time</label>
+                <input type="text" name="time" class="form-control" ng-disabled="saving" required ng-model="entry.timePart"
+                       uib-datepicker-popup="HH:mm" placeholder="hh:mm" />
+                <div class="help-block" ng-messages="entryForm.time.$error" ng-if="entryForm.time.$touched">
+                    <p ng-message="required">Time is required</p>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error': entryForm.calories.$touched && entryForm.calories.$invalid }">
+                <label>Calories</label>
+                <input type="number" name="calories" ng-disabled="saving" required class="form-control" ng-model="entry.Calories"
+                       ng-placeholder="Enter number of calories consumed" min="1" max="999999999" integer />
+                <span ng-show="entryForm.calories.$error.positive">error</span>
+                <div class="help-block" ng-messages="entryForm.calories.$error" ng-if="entryForm.calories.$touched">
+                    <p ng-message="required">Amount of calories is required</p>
+                    <p ng-message="integer">Amount of calories must be integer</p>
+                    <p ng-message="min">Amount of calories must be positive</p>
+                    <p ng-message="max">Too many calories :(</p>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error': entryForm.comment.$touched && entryForm.comment.$invalid }">
+                <label>Comment</label>
+                <input type="text" name="comment" ng-disabled="saving" class="form-control" required ng-model="entry.Comment" placeholder="What was it? Did you enjoy it?" />
+                <div class="help-block" ng-messages="entryForm.comment.$error" ng-if="entryForm.comment.$touched">
+                    <p ng-message="required">Comment is required</p>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <input type="submit" class="btn btn-success" value="Save" ng-disabled="saving || entryForm.$invalid">
+            <button type="button" class="btn btn-danger" ng-click="cancel()" ng-disabled="saving">Cancel</button>
+        </div>
+    </form>
+</div>

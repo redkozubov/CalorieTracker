@@ -1,0 +1,20 @@
+﻿<div class="container">
+    <h1>Daily statistics</h1>
+    <div ng-controller="StatisticsController">
+        <hr />
+        <table class="table table-hover">
+            <thead>
+                <tr>
+                    <th>Date</th>
+                    <th>Calories</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="e in items()" ng-class="{'bg-danger': e.Sum > dailyGoal() && dailyGoal() > 0, 'bg-success': e.Sum <= dailyGoal()}">
+                    <td>{{e.Date | date:'yyyy-MM-dd'}}</td>
+                    <td>{{e.Sum}}</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

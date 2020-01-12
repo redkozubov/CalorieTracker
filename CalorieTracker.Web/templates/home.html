@@ -1,0 +1,40 @@
+﻿<div class="row" ng-controller="HomeController">
+    <div class="jumbotron">
+        <div class="container">
+            <h1>Hello, callories!</h1>
+            <p>This is a test project that features a couple of tables and authentication.</p>
+            <p>Back-end is written with ASP.Net&nbsp;Web&nbsp;API and Entity Framework, front-end is Angular + Bootstrap.</p>
+            <p>You can login as user "admin" with password "admin" or sign up below. No e-mail is required.</p>
+            <div class="panel">
+                <div class="col-md-4" ng-cloak ng-hide="user().authenticated">
+                    <h2>Sign up now</h2>
+                    <form class="css-form " name="signupForm" ng-submit="register()">
+                        <div class="form-group" ng-class="{ 'has-error': signupForm.userName.$touched && signupForm.userName.$invalid }">
+                            <label>Name</label>
+                            <input type="text" name="userName" class="form-control" required ng-model="userName" ng-disabled="saving" />
+                            <div class="help-block" ng-messages="signupForm.userName.$error" ng-if="signupForm.userName.$touched">
+                                <p ng-message="required">User name is required</p>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error': signupForm.password.$touched && signupForm.password.$invalid }">
+                            <label>Password</label>
+                            <input type="password" name="password" class="form-control" required ng-model="password" ng-disabled="saving" placeholder="Password" />
+                            <div class="help-block" ng-messages="signupForm.password.$error" ng-if="signupForm.password.$touched">
+                                <p ng-message="required">Please specify password</p>
+                            </div>
+                        </div>
+                        <div class="form-group" ng-class="{ 'has-error': signupForm.passwordConfirmation.$touched && signupForm.passwordConfirmation.$invalid }">
+                            <input type="password" name="passwordConfirmation" class="form-control" required ng-model="passwordConfirmation" ng-disabled="saving"
+                                   placeholder="Confirm password " equals="{{password}}" />
+                            <div class="help-block" ng-messages="signupForm.passwordConfirmation.$error" ng-if="signupForm.passwordConfirmation.$touched">
+                                <p ng-message="required">Please confirm password</p>
+                                <p ng-message="equals">Passwords do not match</p>
+                            </div>
+                        </div>
+                        <input type="submit" class="btn btn-primary" ng-disabled="saving || signupForm.$invalid" value="Register" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

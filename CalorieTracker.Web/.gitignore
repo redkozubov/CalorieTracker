@@ -1,0 +1,5 @@
+# exclude files installed from nuget
+
+Content/*
+Scripts/*
+fonts/*

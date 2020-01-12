@@ -1,0 +1,46 @@
+﻿<div>
+    <div class="modal-header">
+        <h3 class="modal-title">{{action}}</h3>
+    </div>
+    <form name="userForm" class="css-form" novalidate ng-submit="ok()">
+        <div class="modal-body">
+            <div class="form-group" ng-hide="profileView">
+                <label>Id</label>
+                <input type="text" class="form-control" disabled ng-model="user.Id" placeholder="ID" />
+            </div>
+            <div class="form-group">
+                <label>Name</label>
+                <input type="text" class="form-control" required ng-disabled="user.Id > 0" ng-model="user.UserName" />
+            </div>
+            <div class="form-group" ng-class="{ 'has-error': userForm.dailyGoal.$touched && userForm.dailyGoal.$invalid }">
+                <label>Daily goal</label>
+                <input type="number" name="dailyGoal" integer class="form-control" ng-disabled="saving" ng-model="user.DailyGoal" min="0" max="999999999" />
+                <div class="help-block" ng-messages="userForm.dailyGoal.$error" ng-if="userForm.dailyGoal.$touched">
+                    <p ng-message="integer">Daily goal must be integer value</p>
+                    <p ng-message="min">Daily goal cannot be negative</p>
+                    <p ng-message="max">Too many calories :(</p>
+                </div>
+            </div>
+            <div class="form-group" ng-hide="profileView">
+                <div class="checkbox">
+                    <label>
+                        <input type="checkbox" ng-disabled="saving" ng-model="user.IsAdmin" />
+                        Is admin?
+                    </label>
+                </div>
+            </div>
+            <div class="form-group" ng-class="{ 'has-error': userForm.passwordConfirmation.$touched && userForm.passwordConfirmation.$invalid }">
+                <label>Set password</label>
+                <input type="password" name="password" class="form-control" ng-disabled="saving" ng-model="user.NewPassword" placeholder="New password" />
+                <input type="password" name="passwordConfirmation" equals="{{user.NewPassword}}" class="form-control" ng-disabled="saving" ng-model="passwordConfirmation" placeholder="Confirm password " />
+                <div class="help-block" ng-messages="userForm.passwordConfirmation.$error" ng-if="userForm.passwordConfirmation.$touched">
+                    <p ng-message="equals">Passwords do not match</p>
+                </div>
+            </div>
+        </div>
+        <div class="modal-footer">
+            <input type="submit" class="btn btn-success" ng-disabled="saving || userForm.$invalid" value="Save">
+            <button type="button" class="btn btn-danger" ng-click="cancel()" ng-disabled="saving">Cancel</button>
+        </div>
+    </form>
+</div>

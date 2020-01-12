@@ -1,0 +1,62 @@
+﻿<div class="container">
+    <h1>Your entries</h1>
+    <div ng-controller="EntriesController">
+        <div class="row">
+            <div class="col-sm-3">
+                <label>From date</label>
+                <input type="text" class="form-control" ng-change="reload()" ng-model-options='{ debounce: 200 }'
+                       uib-datepicker-popup="yyyy-MM-dd" ng-model="filter.dateFrom" placeholder="yyyy-mm-dd" />
+            </div>
+            <div class="col-sm-3">
+                <label>To date</label>
+                <input type="text" class="form-control" ng-change="reload()" ng-model-options='{ debounce: 200 }'
+                       uib-datepicker-popup="yyyy-MM-dd" ng-model="filter.dateTo" placeholder="yyyy-mm-dd" />
+            </div>
+            <div class="col-sm-2">
+                <label>From time</label>
+                <input type="text" class="form-control" ng-change="reload()" ng-model-options='{ debounce: 200 }'
+                       uib-datepicker-popup="HH:mm" ng-model="filter.timeFrom" placeholder="hh:mm" />
+            </div>
+            <div class="col-sm-2">
+                <label>To time</label>
+                <input type="text" class="form-control" ng-change="reload()" ng-model-options='{ debounce: 200 }'
+                       uib-datepicker-popup="HH:mm" ng-model="filter.timeTo" placeholder="hh:mm" />
+            </div>
+        </div>
+            <hr />
+            <table class="table table-hover">
+                <thead>
+                    <tr>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Calories</th>
+                        <th>Comment</th>
+                        <th width="1em"><!-- edit button --></th>
+                        <th width="1em"><!-- remove button --></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="e in items()">
+                        <td>{{e.Date | date:'yyyy-MM-dd'}}</td>
+                        <td>{{e.Date | date:'HH:mm'}}</td>
+                        <td>{{e.Calories}}</td>
+                        <td>{{e.Comment}}</td>
+                        <td width="1em">
+                            <button class="btn btn-xs btn-primary" ng-click="editRow(e)"><i class="fa fa-edit"></i></button>
+                        </td>
+                        <td width="1em">
+                            <button class="btn btn-xs btn-warning" ng-click="deleteRow(e.Id)"><i class="fa fa-remove"></i></button>
+                        </td>
+                    </tr>
+                    <tr ng-mouseenter="addVisible=true" ng-mouseleave="addVisible=false">
+                        <td align="right" colspan="5"><span ng-show="addVisible" ng-click="createEntry()" style="text-align: right; cursor: pointer">add another entry</span></td>
+                        <td>
+                            <button class="btn-success btn btn-xs pull-right" ng-click="createEntry()">
+                                <i class="fa fa-plus"></i>
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+    </div>
+</div>
