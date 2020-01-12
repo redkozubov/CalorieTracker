@@ -31,6 +31,7 @@
                         <th>Time</th>
                         <th>Calories</th>
                         <th>Comment</th>
+                        <th width="1em"><!-- copy button --></th>
                         <th width="1em"><!-- edit button --></th>
                         <th width="1em"><!-- remove button --></th>
                     </tr>
@@ -41,6 +42,9 @@
                         <td>{{e.Date | date:'HH:mm'}}</td>
                         <td>{{e.Calories}}</td>
                         <td>{{e.Comment}}</td>
+                        <td width="1em">
+                            <button class="btn btn-xs btn-primary" ng-click="copyRow(e)"><i class="fa fa-copy"></i></button>
+                        </td>
                         <td width="1em">
                             <button class="btn btn-xs btn-primary" ng-click="editRow(e)"><i class="fa fa-edit"></i></button>
                         </td>
