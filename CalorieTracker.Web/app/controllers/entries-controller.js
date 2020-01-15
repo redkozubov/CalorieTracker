@@ -3,7 +3,7 @@
 //
 app.controller('EntriesController', ['EntriesService', '$scope', '$uibModal',
     function (EntriesService, $scope, $uibModal) {
-    var self = $scope;
+    let self = $scope;
     EntriesService.load();
 
     self.filter = { };
@@ -16,6 +16,13 @@ app.controller('EntriesController', ['EntriesService', '$scope', '$uibModal',
     // entries list
     self.items = function () {
         return EntriesService.items;
+    };
+    
+    // copy button click
+    self.copyRow = function (entry) {
+        let copiedEntry = angular.copy(entry);
+        copiedEntry.Id = 0;
+        self.editRow(copiedEntry);
     };
 
     // edit button click
@@ -39,7 +46,7 @@ app.controller('EntriesController', ['EntriesService', '$scope', '$uibModal',
     };
 
     self.createEntry = function () {
-        newEntry = {
+        let newEntry = {
             Id: 0,
             Date: new Date(),
         };
