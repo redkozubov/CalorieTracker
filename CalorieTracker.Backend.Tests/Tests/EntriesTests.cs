@@ -1,11 +1,9 @@
 ﻿using System;
 using System.Linq;
 using System.Net;
-using CalorieTracker.Backend.Controllers.Models;
 using CalorieTracker.Backend.Models;
 using CalorieTracker.Backend.Tests.Extensions;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
-using Newtonsoft.Json;
 using Should;
 
 namespace CalorieTracker.Backend.Tests.Tests
@@ -148,6 +146,57 @@ namespace CalorieTracker.Backend.Tests.Tests
 			entries = api.Entries.List(timeTo: date1.TimeOfDay);
 			entries.ShouldContain(e => e.Id == entry1.Id);
 			entries.ShouldNotContain(e => e.Id == entry2.Id);
+		}
+
+		[TestMethod]
+		public void IfLimitIsSetSearchShouldReturnSetNumberOfEntities()
+		{
+			// Arrange
+			var api = Api.RegisterAndLogon();
+			for (var i = 0; i < 10; i++)
+			{
+				api.Entries.Save(CreateEntry());
+			}
+			
+			// Act
+			var entries = api.Entries.Search("Comment", 4);
+			
+			// Assert
+			Assert.IsTrue(entries.Length == 4);
+		}
+		
+		[TestMethod]
+		public void IfCommentIsNewSearchShouldReturEmptyArray()
+		{
+			// Arrange
+			var api = Api.RegisterAndLogon();
+			for (var i = 0; i < 10; i++)
+			{
+				api.Entries.Save(CreateEntry());
+			}
+			
+			// Act
+			var entries = api.Entries.Search("Commentator", 4);
+			
+			// Assert
+			Assert.IsTrue(entries.Length == 0);
+		}
+		
+		[TestMethod]
+		public void SearchShouldIgnoreCase()
+		{
+			// Arrange
+			var api = Api.RegisterAndLogon();
+			for (var i = 0; i < 10; i++)
+			{
+				api.Entries.Save(CreateEntry());
+			}
+			
+			// Act
+			var entries = api.Entries.Search("com", 4);
+			
+			// Assert
+			Assert.IsTrue(entries.Length == 4);
 		}
 	}
 }

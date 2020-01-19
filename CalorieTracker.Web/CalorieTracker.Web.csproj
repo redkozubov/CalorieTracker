@@ -970,6 +970,7 @@
     <Content Include="Scripts\i18n\angular-locale_zu.js" />
     <Content Include="Scripts\jquery-1.9.1.js" />
     <Content Include="Scripts\jquery-1.9.1.min.js" />
+    <Content Include="templates\entry-search.html" />
     <Content Include="templates\edit-user-form.html" />
     <Content Include="templates\edit-entry-form.html" />
     <Content Include="templates\entries.html" />

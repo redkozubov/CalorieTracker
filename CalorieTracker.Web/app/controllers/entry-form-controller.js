@@ -22,7 +22,7 @@ app.controller('EntryFormController', ['EntriesService', '$scope', '$uibModalIns
 
         // block buttons while saving
         self.saving = false;
-
+        
         // save button click
         self.ok = function () {
             if (self.saving) {
@@ -53,5 +53,14 @@ app.controller('EntryFormController', ['EntriesService', '$scope', '$uibModalIns
         // cancel button click
         self.cancel = function () {
             $uibModalInstance.dismiss('cancel');
+        };
+        
+        self.searchEntries = function (comment) {            
+            return EntriesService.search(comment);
+        };
+        
+        self.selectEntry = function (entry) {
+            self.entry.Calories = entry.Calories;
+            self.entry.Comment = entry.Comment;
         };
     }]);

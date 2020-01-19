@@ -35,6 +35,19 @@ app.service('EntriesService', ['$http', '$log', '$rootScope', '$filter',
                 $log.warn('error loading data');
             });
         };
+        
+        self.search = function(comment) {
+            return $http({
+                method: 'GET',
+                url: baseUrl + '/search',
+                params: {
+                    comment: comment,
+                    limit: 5
+                }                
+                }).then(function(response) {
+                return response.data;
+            });
+        };
 
         self.get = function (id) {
             return $http({
