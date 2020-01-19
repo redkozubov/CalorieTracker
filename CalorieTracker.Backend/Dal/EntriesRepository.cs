@@ -112,5 +112,11 @@ namespace CalorieTracker.Backend.Dal
 			query = query.OrderBy(s => s.Date);
 			return await query.ToArrayAsync();
 		}
+
+		public async Task<Entry[]> GetEntriesByComment(string comment, int limit)
+		{
+			var data = getEntries().Where(e => e.Comment.StartsWith(comment)).Take(limit).ToArray();
+			return await Task.FromResult(data);
+		}
 	}
 }

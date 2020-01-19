@@ -39,6 +39,20 @@ namespace CalorieTracker.Backend.Controllers
 			return await getRepository().GetAsync(id);
 		}
 
+
+		/// <summary>
+		/// Searches for a given number of entities by comment.
+		/// </summary>
+		/// <param name="comment">The substring with which the comment should begin.</param>
+		/// <param name="limit">Number of entities.</param>
+		/// <returns>Given number of entities.</returns>
+		[HttpGet]
+		[Route("api/entries/search")]
+		public async Task<Entry[]> Search(string comment, int limit = 5)
+		{
+			return await getRepository().GetEntriesByComment(comment, limit);
+		}
+
 		/// <summary>
 		/// Creates new or updates exising entry.
 		/// </summary>

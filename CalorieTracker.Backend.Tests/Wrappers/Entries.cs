@@ -54,6 +54,15 @@ namespace CalorieTracker.Backend.Tests.Wrappers
 		{
 			return _client.GetAsync("/api/entries/" + id).ReadResponse<Entry>();
 		}
+		
+		/// <summary>
+		/// Searches for a given number of entities by comment.
+		/// </summary>
+		public Entry[] Search(string comment, int limit)
+		{
+			var url = $"/api/entries/search?comment={comment}&limit={limit}";
+			return _client.GetAsync(url).ReadResponse<Entry[]>();
+		}
 
 		/// <summary>
 		/// Saves an entry.
